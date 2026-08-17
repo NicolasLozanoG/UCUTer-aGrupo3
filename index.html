@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucutería - Grupo 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <h1 id="home" class="logo">Ucutería</h1>
+            <nav class="nav-links">
+                <a href="#home" class="active">Inicio</a>
+                <a href="#menu-heading">Menú</a>
+                <a href="#search-section">Buscar</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="cart-trigger-btn" id="open-cart-btn" aria-label="Abrir Carrito">
+                    <object type="image/svg+xml" data="svg/shopping-bag.svg" width="22" height="22"></object>
+                    <span class="cart-badge-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-subtitle-script">Bienvenidos</span>
+            <h2 class="hero-title">PIDE <span>TU CAFE</span></h2>
+            <div class="hero-actions">
+                <a href="#menu-heading" class="btn-hero-primary">Ver Menú</a>
+            </div>
+        </div>
+        <div class="hero-image-wrap">
+            <img src="images/hero_coffee.jpg" alt="Café helado Ucutería" class="hero-product-img">
+        </div>
+    </section>
+
+    <main class="main-container">
+        <div class="section-header" id="menu-heading">
+            <div class="section-title-wrap">
+                <h2 class="section-title-main">Menu</h2>
+                <span class="section-title-script">café, té y pastelería</span>
+            </div>
+            <button class="btn-basket-pill" id="cart-quick-btn">
+                <span>Mi carrito</span>
+                <object type="image/svg+xml" data="svg/shopping-bag-white.svg" width="18" height="18"></object>
+            </button>
+        </div>
+
+        <section class="controls-section" id="search-section">
+            <div class="search-bar-wrap">
+                <input type="text" id="search" placeholder="Buscar producto...">
+                <button class="btn-search">
+                    <object type="image/svg+xml" data="svg/search-white.svg" width="18" height="18"></object>
+                    <span>Buscar</span>
+                </button>
+            </div>
+
+            <div id="filter" class="filter">
+                <button data-cat="all" class="filter-pill active">Todos</button>
+                <button data-cat="coffee" class="filter-pill">Café</button>
+                <button data-cat="tea" class="filter-pill">Té</button>
+                <button data-cat="pastry" class="filter-pill">Pastelería</button>
+                <button data-cat="bakery" class="filter-pill">Panadería</button>
+            </div>
+
+            <div class="sort-wrap">
+                <select id="ordenar">
+                    <option value="">Ordenar por...</option>
+                    <option value="price-asc">Precio ↑</option>
+                    <option value="price-desc">Precio ↓</option>
+                    <option value="name-asc">Nombre A-Z</option>
+                    <option value="name-desc">Nombre Z-A</option>
+                </select>
+            </div>
+        </section>
+
+        <ul id="item-list"></ul>
+    </main>
+
+    <aside id="cart">
+        <div class="cart-header">
+            <h2>Carrito</h2>
+            <button id="close-cart" aria-label="Cerrar carrito">×</button>
+        </div>
+        <div id="cart-items">
+            <ul id="cart-items-list">
+            </ul>
+        </div>
+        <div id="cart-details">
+            <p>Subtotal: $<span id="subtotal">0.00</span></p>
+            <p>IVA 22%: $<span id="iva">0.00</span></p>
+            <p>Envio: $<span id="envio">0.00</span></p>
+        </div>
+        <div id="cart-total">
+            <p>Total: $<span id="total">0.00</span></p>
+        </div>
+        <div class="cupon-cart">
+            <label for="cuponInput">Cupón de descuento:</label>
+            <div class="cupon-input-wrap">
+                <input type="text" id="cuponInput" placeholder="Ej: UCUDESC10">
+                <button id="aplicarCupon">Aplicar</button>
+            </div>
+            <p id="cuponMsg" class="info"></p>
+        </div>
+        <div class="cart-actions">
+            <button id="vaciar-carrito">Vaciar carrito</button>
+            <button id="checkout">Finalizar compra</button>
+        </div>
+    </aside>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <form id="checkoutForm">
+                <h2>Confirmar pedido</h2>
+
+                <fieldset>
+                    <legend>Datos personales</legend>
+                    <label>Nombre completo: <input type="text" required placeholder="Nombre Apellido"></label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contacto</legend>
+                    <label>Email: <input type="email" required placeholder="email@mail.com"></label>
+                    <label>Teléfono: <input type="text" pattern="[0-9]+" required placeholder="098765432"></label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Entrega</legend>
+                    <label>Dirección: <input type="text" required placeholder="Calle Ficticia 123"></label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Método de pago</legend>
+                    <label><input type="radio" name="pago" required> Efectivo</label>
+                    <label><input type="radio" name="pago"> Tarjeta</label>
+                </fieldset>
+
+                <label class="checkbox-label"><input type="checkbox" required> Acepto los términos y condiciones</label>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-confirm">Confirmar compra</button>
+                    <button type="button" id="close-checkout" class="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3 class="footer-logo">Ucutería</h3>
+            </div>
+            <p class="footer-copy">© 2026 Ucutería - Grupo 3. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
